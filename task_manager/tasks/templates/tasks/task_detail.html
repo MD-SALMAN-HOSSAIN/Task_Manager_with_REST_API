@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Detail</title>
+</head>
+<body>
+    <h1>{{ task.title }}</h1>
+    <p>Description: {{ task.description }}</p>
+    <p>Due Date: {{ task.due_date }}</p>
+    <p>Priority: {{ task.priority }}</p>
+    <p>Status: {% if task.complete %}Complete{% else %}Incomplete{% endif %}</p>
+    <h2>Photos</h2>
+    {% for photo in task.get_photos %}
+        <img src="{{ photo.photo.url }}" alt="Task Photo">
+        <a href="{% url 'delete_photo' task.id photo.id %}">Delete Photo</a>
+    {% endfor %}
+    <br/>
+    <a href="{% url 'add_photo' task.id %}">Add Photo</a>
+
+
+    <a href="{% url 'edit_task' task.id %}">Edit Task</a>
+    <a href="{% url 'delete_task' task.id %}">Delete Task</a>
+</body>
+</html>
